@@ -13,4 +13,4 @@ entry_points:
     parameters:
       n_estimators: {type: int, default: 15}
       min_samples_split: {type: int, default: 3}
-    command: "python train.py --n_estimators {n_estimators} --min_samples_split {min_samples_split}"
+    command: "python3 train.py --n_estimators {n_estimators} --min_samples_split {min_samples_split}"
