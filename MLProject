@@ -1,6 +1,7 @@
 name: appointment-cancellation-detector
 docker_env:
   image: jedha/mlflow-project
+  volumes: ["$(pwd):/home/app"]
   environment: [
     "MLFLOW_TRACKING_URI",
     "AWS_ACCESS_KEY_ID",
