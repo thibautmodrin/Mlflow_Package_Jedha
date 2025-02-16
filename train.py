@@ -13,6 +13,10 @@ from sklearn.pipeline import Pipeline
 
 if __name__ == "__main__":
 
+    experiment_name="appointment-cancellation-detector"
+    mlflow.set_experiment(experiment_name)
+    experiment=mlflow.get_experiment_by_name(experiment_name)
+
     print("training model...")
     
     # Time execution
@@ -81,9 +85,10 @@ if __name__ == "__main__":
         ('features_preprocessing', feature_preprocessor),
         ("Regressor",RandomForestClassifier(n_estimators=n_estimators, min_samples_split=min_samples_split))
     ])
-
+    client=mlflow.tracking.MlflowClient()
+    run=client.create_run(experiment.experiment_id)
     # Log experiment to MLFlow
-    with mlflow.start_run() as run:
+    with mlflow.start_run(run_id=run.info.run_id) as run:
         model.fit(X_train, y_train)
         predictions = model.predict(X_train)
         
